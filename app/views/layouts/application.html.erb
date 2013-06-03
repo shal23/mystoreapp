@@ -10,7 +10,6 @@
     <%= yield(:head) %>
   </head>
   <body class='<%= controller.controller_name %>'>
-  <!--<body class="<%= controller_name %> <%= action_name %>">-->
     <div id="banner">
 
       <%= image_tag("logo.png") %>
@@ -20,11 +19,16 @@
     </div>
 
     <div id="columns">
-       <div id="side">
+      <div id="side">
         <div id="cart">
+          <% if @cart.line_items.empty? %>
+                    style="display: none"
+          <% end %>
+          <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
           <%= render @cart %>
-    </div>
-
+          <% end %>
+        </div>
+     
           <ul>
 
             <li><a href="http://www....">Home</a></li>
@@ -37,7 +41,7 @@
 
           </ul>
 
-        </div>
+      </div>
         <div id="main">
 
         <%= yield %>
@@ -48,26 +52,3 @@
   </body>
 
 </html>
-         <!--<div class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
-        </div>
-      </nav>
-    </div>
-    <div id="main" role="main">
-      <div class="container">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
-          </div>
-          <footer>
-          </footer>
-        </div>-->
-      <!--</div> --><!--! end of .container -->
-    <!--</div> --><!--! end of #main -->
-  <!--</body>
-</html>-->
