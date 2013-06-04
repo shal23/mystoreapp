@@ -21,14 +21,11 @@
     <div id="columns">
       <div id="side">
         <div id="cart">
-          <% if @cart.line_items.empty? %>
-                    style="display: none"
-          <% end %>
           <% if @cart %>
-          <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-          <%= render @cart %>
+            <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+              <%= render @cart %>
+            <% end %>
           <% end %>
-        <% end %>
         </div>
      
           <ul>
@@ -42,6 +39,17 @@
             <li><a href="http://www..../contact">Contact</a></li>
 
           </ul>
+
+          <% if session[:user_id] %>
+
+           <ul>
+             <li><%= link_to 'Orders', orders_path %></li>
+             <li><%= link_to 'Products', products_path %></li>
+             <li><%= link_to 'Users', users_path %></li>
+            </ul>
+
+          <%= button_to 'Logout', logout_path, method: :delete %>
+      <% end %>
 
       </div>
         <div id="main">
